@@ -43,8 +43,8 @@ MyHomeWindow::MyHomeWindow(QWidget* parent) :
     QPixmap pix12;
     pix12.load(":/img/背景图_蓝.png");
     QPalette p;
-    p.setBrush(QPalette::Window, QBrush(pix12));
-    // p.setBrush(QPalette::Window, Qt::gray);
+    // p.setBrush(QPalette::Window, QBrush(pix12));
+    p.setColor(QPalette::Window, Qt::gray);
 
     this->setPalette(p);
 
@@ -137,9 +137,14 @@ void MyHomeWindow::createStatusBar()
     // this->setCentralWidget(textEdit);
 
     QWidget* widget = new QWidget(this);
-    widget->setStyleSheet("background-color: red;");
-
-
+    // widget->setStyleSheet("background-color: red;");
+    // 如果这个QWidget直接show，是有背景色的，但是如果把它放到一个父Widget中时，它就没有了效果。
+    widget->setAutoFillBackground(true);
+    QPalette p;
+    // p.setBrush(QPalette::Window, QBrush(pix12));
+    // p.setColor(QPalette::Window, Qt::green);
+    p.setBrush(this->backgroundRole(),QBrush(Qt::green));
+    widget->setPalette(p);
     // QVBoxLayout *layout = new QVBoxLayout(widget);
 
     auto* label = new QLabel("这是一个标签", widget);
