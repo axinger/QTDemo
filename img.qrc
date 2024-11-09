@@ -1,7 +1,4 @@
 <RCC>
     <qresource prefix="/">
-        <file>img/礼盒.png</file>
-        <file>img/绣球.png</file>
-        <file>img/玉兔.png</file>
     </qresource>
 </RCC>

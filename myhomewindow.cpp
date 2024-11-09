@@ -41,10 +41,10 @@ MyHomeWindow::MyHomeWindow(QWidget* parent) :
 
     // setAutoFillBackground(true);
     QPixmap pix12;
-    pix12.load(":/img/绣球.png");
+    pix12.load(":/img/背景图_蓝.png");
     QPalette p;
-    // p.setBrush(QPalette::Window, QBrush(pix12));
-    p.setBrush(QPalette::Window, Qt::gray);
+    p.setBrush(QPalette::Window, QBrush(pix12));
+    // p.setBrush(QPalette::Window, Qt::gray);
 
     this->setPalette(p);
 
