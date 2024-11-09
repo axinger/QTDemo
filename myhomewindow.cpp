@@ -22,7 +22,32 @@ MyHomeWindow::MyHomeWindow(QWidget* parent) :
 {
     std::cout << "home创建了" << std::endl;
     setWindowTitle("首页");
-    setMinimumSize(500, 500);
+    // setMinimumSize(500, 500);
+    // setFixedSize(800,800);
+
+    this->resize(800, 600);
+
+    // QPalette::Background → QPalette::Window
+    //
+    // QPalette::Foreground → QPalette::WindowText
+    //
+    // QPalette::Base → 保持不变
+    //
+    // QPalette::Text → 保持不变
+    //
+    // QPalette::Button → 保持不变
+    //
+    // QPalette::ButtonText → 保持不变
+
+    // setAutoFillBackground(true);
+    QPixmap pix12;
+    pix12.load(":/img/绣球.png");
+    QPalette p;
+    // p.setBrush(QPalette::Window, QBrush(pix12));
+    p.setBrush(QPalette::Window, Qt::gray);
+
+    this->setPalette(p);
+
     // showMaximized();
     // QFont fot;
     // fot.setBold(30);
@@ -40,8 +65,6 @@ void MyHomeWindow::setupMenu()
 
     // 添加菜单
     auto* menu1 = new QMenu("文件");
-
-
 
 
     auto* action11 = new QAction("打开文件");
@@ -92,30 +115,29 @@ void MyHomeWindow::createStatusBar()
     // 状态栏，自带的，不需要创建
     auto* statusbar = statusBar();
     this->setStatusBar(statusbar);
-//     auto* ac2 = new QAction("状态栏1");
-// statusbar->addAction(ac2);
+    //     auto* ac2 = new QAction("状态栏1");
+    // statusbar->addAction(ac2);
 
     // 临时信息
-    statusbar->showMessage("页面显示成功",5000);
+    statusbar->showMessage("页面显示成功", 5000);
     // QPushButton* btn0 = new QPushButton("状态0",this);
     // statusbar->addWidget(btn0,10);
 
 
     //正式信息，在右侧
-    QPushButton* btn1 = new QPushButton("www.baidu.com",this);
+    QPushButton* btn1 = new QPushButton("www.baidu.com", this);
     statusbar->addPermanentWidget(btn1); //addPermanentWidget放在右边
 
     //铆钉部件，浮动的窗口
-    QDockWidget* qDockWidget = new QDockWidget("注册",this);
+    QDockWidget* qDockWidget = new QDockWidget("注册", this);
 
-    this->addDockWidget(Qt::TopDockWidgetArea,qDockWidget);
+    this->addDockWidget(Qt::TopDockWidgetArea, qDockWidget);
 
     // QTextEdit *textEdit = new QTextEdit("文本编辑器",this);
     // this->setCentralWidget(textEdit);
 
     QWidget* widget = new QWidget(this);
     widget->setStyleSheet("background-color: red;");
-
 
 
     // QVBoxLayout *layout = new QVBoxLayout(widget);
