@@ -26,6 +26,8 @@ MyHomeWindow::MyHomeWindow(QWidget* parent) :
     // setFixedSize(800,800);
 
     this->resize(800, 600);
+    setWindowIcon(QIcon(":/img/礼盒.png"));
+    setWindowIconText("阿星");
 
     // QPalette::Background → QPalette::Window
     //
