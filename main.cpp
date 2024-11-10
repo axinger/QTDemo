@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QtGui>
 #include <QVBoxLayout>
+#include <ui_AppLogin.h>
+
+#include "applogin.h"
 #include "myregister.h"
 
 #include "mylogin.h"
@@ -127,10 +130,15 @@ void test4_引用和指针参数()
 
 int main(int argc, char* argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
+
+    // 设置全局样式表，为所有QPushButton设置统一的图标
+    QIcon globalIcon(":/绣球.png"); // 替换为你的图标文件路径
+    // QString styleSheet = QString("QPushButton { icon: url(%1); }").arg(globalIcon.name());
+    // app.setStyleSheet(styleSheet);
+    QApplication::setWindowIcon(globalIcon);
 
     // MyLogin login;
-    // 显示登录窗口
     // login.show();
     // MyHomeWindow home_window;
     // home_window.show();
@@ -149,8 +157,11 @@ int main(int argc, char* argv[])
     // MyRegister r;
     // r.show();
 
-    MyLogoutWidget logout_widget;
-    logout_widget.show();
+    // MyLogoutWidget logout_widget;
+    // logout_widget.show();
+
+    AppLogin login;
+    login.show();
 
     return QApplication::exec();
 

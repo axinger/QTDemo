@@ -12,8 +12,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
-
+set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/icon.rc")
 set(PROJECT_SOURCES
+        ${app_icon_resource_windows}
         main.cpp
         mylogin.cpp
         mylogin.h
@@ -24,6 +25,9 @@ set(PROJECT_SOURCES
         mylogoutwidget.cpp
         mylogoutwidget.h
         mylogoutwidget.ui
+        applogin.cpp
+        applogin.h
+        applogin.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
