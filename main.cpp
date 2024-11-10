@@ -6,7 +6,7 @@
 #include <QVBoxLayout>
 #include "myregister.h"
 
-#include "login.h"
+#include "mylogin.h"
 #include "myhomewindow.h"
 #include "mylogoutwidget.h"
 

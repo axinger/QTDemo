@@ -4,7 +4,7 @@
 
 // You may need to build the project (run Qt uic code generator) to get "ui_Login.h" resolved
 
-#include "login.h"
+#include "mylogin.h"
 
 #include <iostream>
 #include <QPushButton>

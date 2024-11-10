@@ -15,9 +15,8 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
-        login.cpp
-        login.h
-        login.cpp
+        mylogin.cpp
+        mylogin.h
         myhomewindow.cpp
         myregister.cpp
         myregister.h
