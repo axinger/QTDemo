@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <QPushButton>
 #include <QMainWindow>
+#include <QtGui>
 #include <QVBoxLayout>
 #include "myregister.h"
 
@@ -148,8 +149,8 @@ int main(int argc, char* argv[])
     // r.show();
 
     MyLogoutWidget logout_widget;
-    logout_widget.show();
 
+    logout_widget.show();
     return QApplication::exec();
 
 
