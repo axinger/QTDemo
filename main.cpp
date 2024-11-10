@@ -3,9 +3,11 @@
 #include <QPushButton>
 #include <QMainWindow>
 #include <QVBoxLayout>
+#include "myregister.h"
 
 #include "login.h"
 #include "myhomewindow.h"
+#include "mylogoutwidget.h"
 
 void test_map()
 {
@@ -127,8 +129,8 @@ int main(int argc, char* argv[])
     QApplication a(argc, argv);
 
     // Login login;
-    MyHomeWindow home_window;
-    home_window.show();
+    // MyHomeWindow home_window;
+    // home_window.show();
     // home_window.hide();
 
     // 连接登录成功的信号到槽函数
@@ -141,6 +143,12 @@ int main(int argc, char* argv[])
 
     // 显示登录窗口
     // login.show();
+
+    // MyRegister r;
+    // r.show();
+
+    MyLogoutWidget logout_widget;
+    logout_widget.show();
 
     return QApplication::exec();
 

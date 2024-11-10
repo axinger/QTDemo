@@ -19,6 +19,12 @@ set(PROJECT_SOURCES
         login.h
         login.cpp
         myhomewindow.cpp
+        myregister.cpp
+        myregister.h
+        myregister.ui
+        mylogoutwidget.cpp
+        mylogoutwidget.h
+        mylogoutwidget.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
