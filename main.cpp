@@ -129,7 +129,9 @@ int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
 
-    MyLogin login;
+    // MyLogin login;
+    // 显示登录窗口
+    // login.show();
     // MyHomeWindow home_window;
     // home_window.show();
     // home_window.hide();
@@ -142,14 +144,13 @@ int main(int argc, char* argv[])
     //     // login.close();
     // });
 
-    // 显示登录窗口
-    login.show();
+
 
     // MyRegister r;
     // r.show();
 
-    // MyLogoutWidget logout_widget;
-    // logout_widget.show();
+    MyLogoutWidget logout_widget;
+    logout_widget.show();
 
     return QApplication::exec();
 

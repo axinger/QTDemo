@@ -11,6 +11,8 @@
 #include <qbuttongroup.h>
 #include <qdialog.h>
 #include <QGroupBox>
+#include <qinputdialog.h>
+#include <qmessagebox.h>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QVBoxLayout>
@@ -72,8 +74,31 @@ MyLogoutWidget::MyLogoutWidget(QWidget* parent) :
     {
         QDialog dialog;
         // dialog.setBaseSize(120,60 );
+        dialog.setWindowFlag(Qt::WindowCloseButtonHint, false);
         dialog.setFixedSize(180, 90);
         dialog.setWindowTitle("请选择");
+
+        QHBoxLayout layout;
+        QPushButton btnOk("Ok");
+        QPushButton btnCancel("Cancel");
+
+        // 连接按钮的点击信号到对应的槽函数
+        QObject::connect(&btnOk, &QPushButton::clicked, [&]()
+        {
+            QMessageBox::information(&dialog, "Information", "You clicked Ok.");
+            dialog.accept(); // 接受对话框的当前状态
+        });
+
+        QObject::connect(&btnCancel, &QPushButton::clicked, [&]()
+        {
+            QMessageBox::information(&dialog, "Information", "You clicked Cancel.");
+            dialog.reject(); // 拒绝对话框的当前状态
+        });
+
+        layout.addWidget(&btnOk);
+        layout.addWidget(&btnCancel);
+
+        dialog.setLayout(&layout);
 
         dialog.exec();
     });
@@ -92,15 +117,53 @@ MyLogoutWidget::MyLogoutWidget(QWidget* parent) :
         dialog->show();
     });
 
-    QPushButton dialogBtn3 =  QPushButton("临时按钮", this);
+    // 没有使用*创建对象，在栈中，临时对象，超出就会销毁
+    QPushButton dialogBtn3 = QPushButton("临时按钮", this);
     // 连接 destroyed 信号到槽函数
     connect(&dialogBtn3, &QWidget::destroyed, this, [=]()
     {
         std::cout << "dialogBtn3 已经销毁了" << std::endl;
     });
-
-
     dialogBtn3.setGeometry(dialogBtn2->x(), dialogBtn2->y() + dialogBtn2->height() + 10, 100, 60);
+
+
+    QPushButton* dialogBtn4 = new QPushButton("消息对话框", this);
+    dialogBtn4->setGeometry(dialogBtn2->x(), dialogBtn2->y() + dialogBtn2->height() + 10, 100, 60);
+    connect(dialogBtn4, &QPushButton::clicked, this, [=]()
+    {
+        // QMessageBox* msgBox = new QMessageBox();
+        //
+        // msgBox->setAttribute(Qt::WA_DeleteOnClose); //关闭，就销毁
+        // // dialog.setBaseSize(120,60 );
+        // msgBox->setFixedSize(180, 90);
+        // msgBox->setWindowTitle("提示");
+        // msgBox->show();
+
+        // 在堆中
+        QMessageBox::information(this, "Information", "You clicked Cancel.",
+                                 QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel | QMessageBox::Ok,
+                                 QMessageBox::Cancel);
+        // QMessageBox::about(this, "about", "You clicked Cancel.");
+        // QMessageBox::critical(this, "critical", "You clicked Cancel.");
+        //
+        // QMessageBox::warning(this, "warning", "You clicked Cancel.");
+        // QMessageBox::aboutQt(this, "aboutQt");
+        //
+        // QMessageBox::StandardButton question = QMessageBox::question(this, "question", "You clicked Cancel.");
+        //
+        // std::cout << "question=" << ((question == QMessageBox::Yes) ? "确定" : "取消") << std::endl;
+    });
+
+    QPushButton* dialogBtn5 = new QPushButton("文本输入框弹窗", this);
+    dialogBtn5->setGeometry(dialogBtn4->x(), dialogBtn4->y() + dialogBtn4->height() + 10, 100, 60);
+    connect(dialogBtn5, &QPushButton::clicked, this, [=]()
+    {
+        bool ok;
+        QString text = QInputDialog::getText(this, "输入文字", "222",
+                                             QLineEdit::Normal,"默认文字",&ok);
+
+        std::cout << text.toStdString() << std::endl;
+    });
 }
 
 MyLogoutWidget::~MyLogoutWidget()
