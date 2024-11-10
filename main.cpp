@@ -130,38 +130,29 @@ void test4_引用和指针参数()
 
 int main(int argc, char* argv[])
 {
-    QApplication app(argc, argv);
-
+    QApplication a(argc, argv);
+    // 设置全局样式
+    // a.setStyleSheet("QPushButton { background-color: red; }");
     // 设置全局样式表，为所有QPushButton设置统一的图标
-    QIcon globalIcon(":/绣球.png"); // 替换为你的图标文件路径
+    // QIcon globalIcon(":/绣球.png"); // 替换为你的图标文件路径
     // QString styleSheet = QString("QPushButton { icon: url(%1); }").arg(globalIcon.name());
     // app.setStyleSheet(styleSheet);
-    QApplication::setWindowIcon(globalIcon);
+    // QApplication::setWindowIcon(globalIcon);
 
     // MyLogin login;
     // login.show();
     // MyHomeWindow home_window;
     // home_window.show();
     // home_window.hide();
-
-    // 连接登录成功的信号到槽函数
-    // QObject::connect(&login, &Login::loginSuccessful, [&]() {
-    //
-    //     home_window.show();
-    //     home_window.activateWindow();
-    //     // login.close();
-    // });
-
-
-
-    // MyRegister r;
-    // r.show();
-
-    // MyLogoutWidget logout_widget;
-    // logout_widget.show();
-
     AppLogin login;
     login.show();
+    MyHomeWindow home_window;
+    QObject::connect(&login, &AppLogin::loginSuccessful, [&]()
+    {
+        home_window.show();
+        login.close();
+    });
+    // QObject::connect(&login, &AppLogin::loginSuccessful, &login, &AppLogin::deleteLater, Qt::QueuedConnection);
 
     return QApplication::exec();
 

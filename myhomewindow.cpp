@@ -20,6 +20,13 @@
 MyHomeWindow::MyHomeWindow(QWidget* parent) :
     QMainWindow(parent)
 {
+
+}
+
+void MyHomeWindow::showEvent(QShowEvent *event)
+{
+    QMainWindow::showEvent(event);  // 调用父类的 showEvent
+
     std::cout << "home创建了" << std::endl;
     setWindowTitle("首页");
     // setMinimumSize(500, 500);
@@ -62,7 +69,6 @@ MyHomeWindow::MyHomeWindow(QWidget* parent) :
     createStatusBar();
     // createCenter();
 }
-
 // 菜单栏
 void MyHomeWindow::setupMenu()
 {

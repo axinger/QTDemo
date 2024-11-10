@@ -25,7 +25,8 @@ public:
     explicit MyHomeWindow(QWidget* parent = nullptr);
 
     ~MyHomeWindow() override;
-
+protected:
+    void showEvent(QShowEvent *event) override;  // 重写 showEvent
 private:
     Ui::MyHomeWindow* ui{};
     void setupMenu();

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <qbuttongroup.h>
 #include <qlineedit.h>
+#include <QMenuBar>
 
 #include "ui_MyRegister.h"
 
