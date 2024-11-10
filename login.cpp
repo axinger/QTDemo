@@ -13,7 +13,7 @@
 
 
 
-Login::Login(QWidget* parent) :
+MyLogin::MyLogin(QWidget* parent) :
     QWidget(parent)
 {
 
@@ -134,7 +134,7 @@ Login::Login(QWidget* parent) :
     test1Btn->setGeometry(closeBtn->x(), closeBtn->y() + closeBtn->height() + 10, closeBtn->width(),
                           closeBtn->height());
     // loginBtn->click(); //通过编程方式触发点击事件
-    connect(test1Btn, &QPushButton::clicked, this, &Login::onButtonClicked);
+    connect(test1Btn, &QPushButton::clicked, this, &MyLogin::onButtonClicked);
 
 
     //取消槽连接
@@ -149,14 +149,14 @@ Login::Login(QWidget* parent) :
     void (Teacher::*hungry)() = &Teacher::hungry;
     // 在大多数现代编译器中，省略 & 操作符也是可以的，但为了代码的清晰和标准符合性，建议始终使用 &。
     void (Teacher::*hungry11)() = Teacher::hungry;
-    connect(tea, hungry, this, &Login::teacherEat);
+    connect(tea, hungry, this, &MyLogin::teacherEat);
 
     // （函数名称）（参数） = 指向的函数名称，
     void (Teacher::*hungry2)(QString) = &Teacher::hungry;
-    connect(tea, hungry2, this, &Login::teacherEat2);
+    connect(tea, hungry2, this, &MyLogin::teacherEat2);
 }
 
-void Login::onButtonClicked() const
+void MyLogin::onButtonClicked() const
 {
     std::cout << "点击了" << std::endl;
     // this->loginButton;
@@ -166,19 +166,19 @@ void Login::onButtonClicked() const
     emit this->tea->hungry("汉堡包");
 }
 
-void Login::teacherEat() const
+void MyLogin::teacherEat() const
 {
     std::cout << tea << "老师饿了，我知道了" << std::endl;
 }
 
-void Login::teacherEat2(const QString& name) const
+void MyLogin::teacherEat2(const QString& name) const
 {
     std::cout << tea << "老师饿了，我知道了" << name.toStdString() << std::endl;
     qDebug() << name.toUtf8().toStdString();
 }
 
 
-Login::~Login()
+MyLogin::~MyLogin()
 {
     std::cout << "login销毁了========" << std::endl;
 

@@ -14,22 +14,22 @@ QT_BEGIN_NAMESPACE
 
 namespace Ui
 {
-    class Login;
+    class MyLogin;
 }
 
 QT_END_NAMESPACE
 
-class Login : public QWidget
+class MyLogin : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Login(QWidget* parent = nullptr);
+    explicit MyLogin(QWidget* parent = nullptr);
 
-    ~Login() override;
+    ~MyLogin() override;
 
 private:
-    Ui::Login* ui={};
+    Ui::MyLogin* ui={};
     QPushButton* loginButton{};
     void onButtonClicked() const;
     void teacherEat() const;
