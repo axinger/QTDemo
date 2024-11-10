@@ -31,14 +31,17 @@ private:
     Ui::AppLogin* ui;
 
 protected:
-    void mousePressEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent* event) override;
 
-    void mouseMoveEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent* event) override;
 
-    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent* event) override;
+
+
+    void paintEvent(QPaintEvent* event) override;
 
 private:
-    bool m_dragging;       // 标记是否正在拖动
+    bool m_dragging; // 标记是否正在拖动
     QPoint m_dragPosition; // 拖动位置偏移量
 };
 

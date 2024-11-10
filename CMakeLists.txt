@@ -28,6 +28,9 @@ set(PROJECT_SOURCES
         applogin.cpp
         applogin.h
         applogin.ui
+        apphomewindow.cpp
+        apphomewindow.h
+        apphomewindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

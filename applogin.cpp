@@ -12,7 +12,10 @@
 #include <qformlayout.h>
 #include <QLabel>
 #include <QLineEdit>
+#include <qpainter.h>
+#include <qpainterpath.h>
 #include <QPushButton>
+#include <qstyleoption.h>
 
 #include "myhomewindow.h"
 #include "ui_AppLogin.h"
@@ -25,12 +28,29 @@ AppLogin::AppLogin(QWidget *parent) :
     // 设置窗口大小
     resize(600, 400);
 
+    // this->setObjectName("mainWidget");
+    // this->setStyleSheet("#mainWidget { border: 1px solid red; }");
+    // this->setStyleSheet("QWidget {  background-color:rgb(255, 85, 127) }");
+
+   // setStyleSheet("background-color: white; "     // 设置背景颜色
+   //                          "border: 2px solid #3498db;"    // 自定义边框颜色和宽度
+   //                          "border-radius: 15px;");        // 设置圆角半径
+
+    // this->setObjectName("contentWidget");
+    // this->setStyleSheet("#contentWidget{background: lightgray; border-radius: 4px;}" // 定制圆角
+    //                              ".QLabel{background: gray;}.QTextEdit{background: white;}");
+
     // 关闭了标题栏，就不能移动了，所以重写手势方法
     // this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
     // 设置窗口标志为普通窗口且无边框
-    setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    // this->setWindowFlags(Qt::FramelessWindowHint);
-    // this->setWindowFlags(Qt::SubWindow);
+    // setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+
+    // 设置窗口的透明背景
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    // 设置无边框和无标题栏
+    this->setWindowFlags(Qt::FramelessWindowHint);
+
+    // this->setStyleSheet("AppLogin { border: 1px solid darkyellow; border-radius: 10px; }");
 
     // setFixedSize(600, 400);
 
@@ -126,8 +146,8 @@ AppLogin::~AppLogin() {
 }
 
 
-void AppLogin::mousePressEvent(QMouseEvent *event)  {
-    if (event->button() == Qt::LeftButton) {
+void AppLogin::mousePressEvent(QMouseEvent *event)   {
+    if (event->button() == Qt::LeftButton) { // 鼠标左键
         m_dragPosition = event->globalPos() - frameGeometry().topLeft();
         m_dragging = true;
     }
@@ -145,3 +165,31 @@ void AppLogin::mouseReleaseEvent(QMouseEvent *event)  {
     m_dragging = false;
     event->accept();
 }
+
+// 去除边框去除标题栏后，自定义边框，绘制边框，设置边框，矩形，线
+void AppLogin::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+
+    // 设置圆角半径
+    constexpr int borderRadius = 10;
+    // 启用抗锯齿以确保边缘平滑
+    painter.setRenderHint(QPainter::Antialiasing, true);
+
+    // 使用 QPainterPath 创建圆角矩形路径
+    QPainterPath path;
+    path.addRoundedRect(this->rect(), borderRadius, borderRadius);
+
+    // 填充背景色
+    // painter.fillPath(path, Qt::white); // 这里可以设置其他背景颜色
+    painter.fillPath(path, this->palette().window());
+    // 设置边框颜色和宽度
+    painter.setPen(QPen(Qt::darkYellow, 1));
+
+    // 绘制边框
+    painter.drawPath(path);
+
+}
+
+
+

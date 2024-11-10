@@ -12,6 +12,7 @@
 #include "mylogin.h"
 #include "myhomewindow.h"
 #include "mylogoutwidget.h"
+#include "apphomewindow.h"
 
 void test_map()
 {
@@ -145,8 +146,14 @@ int main(int argc, char* argv[])
     // home_window.show();
     // home_window.hide();
     AppLogin login;
+    login.setObjectName("mainWidget");
+
     login.show();
-    MyHomeWindow home_window;
+    // MyHomeWindow home_window;
+    AppHomeWindow home_window;
+
+    a.setStyleSheet("#mainWidget { border: 1px solid red; }");
+
     QObject::connect(&login, &AppLogin::loginSuccessful, [&]()
     {
         home_window.show();
