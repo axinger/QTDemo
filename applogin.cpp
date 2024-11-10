@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <ostream>
+#include <qevent.h>
 #include <qformlayout.h>
 #include <QLabel>
 #include <QLineEdit>
@@ -23,6 +24,14 @@ AppLogin::AppLogin(QWidget *parent) :
     setWindowTitle("登录");
     // 设置窗口大小
     resize(600, 400);
+
+    // 关闭了标题栏，就不能移动了，所以重写手势方法
+    // this->setWindowFlags(Qt::Dialog|Qt::FramelessWindowHint);
+    // 设置窗口标志为普通窗口且无边框
+    setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    // this->setWindowFlags(Qt::FramelessWindowHint);
+    // this->setWindowFlags(Qt::SubWindow);
+
     // setFixedSize(600, 400);
 
     // 创建表单布局
@@ -114,4 +123,25 @@ AppLogin::AppLogin(QWidget *parent) :
 AppLogin::~AppLogin() {
     delete ui;
     std::cout << "登录页面消失===========" << std::endl;
+}
+
+
+void AppLogin::mousePressEvent(QMouseEvent *event)  {
+    if (event->button() == Qt::LeftButton) {
+        m_dragPosition = event->globalPos() - frameGeometry().topLeft();
+        m_dragging = true;
+    }
+    event->accept();
+}
+
+void AppLogin::mouseMoveEvent(QMouseEvent *event)  {
+    if (m_dragging) {
+        move(event->globalPos() - m_dragPosition);
+        event->accept();
+    }
+}
+
+void AppLogin::mouseReleaseEvent(QMouseEvent *event)  {
+    m_dragging = false;
+    event->accept();
 }

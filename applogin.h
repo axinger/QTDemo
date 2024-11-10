@@ -29,6 +29,17 @@ signals:
 
 private:
     Ui::AppLogin* ui;
+
+protected:
+    void mousePressEvent(QMouseEvent *event);
+
+    void mouseMoveEvent(QMouseEvent *event);
+
+    void mouseReleaseEvent(QMouseEvent *event);
+
+private:
+    bool m_dragging;       // 标记是否正在拖动
+    QPoint m_dragPosition; // 拖动位置偏移量
 };
 
 
