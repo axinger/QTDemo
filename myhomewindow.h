@@ -31,6 +31,7 @@ private:
     void setupMenu();
     void setupToos();
     void createStatusBar();
+    void createCenter();
 };
 
 

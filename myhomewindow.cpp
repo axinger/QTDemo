@@ -26,9 +26,11 @@ MyHomeWindow::MyHomeWindow(QWidget* parent) :
     // setFixedSize(800,800);
 
     this->resize(800, 600);
+    // setFixedSize(800, 600);
     setWindowIcon(QIcon(":/img/礼盒.png"));
     setWindowIconText("阿星");
 
+    // 调色板
     // QPalette::Background → QPalette::Window
     //
     // QPalette::Foreground → QPalette::WindowText
@@ -41,13 +43,14 @@ MyHomeWindow::MyHomeWindow(QWidget* parent) :
     //
     // QPalette::ButtonText → 保持不变
 
-    // setAutoFillBackground(true);
-    QPixmap pix12;
-    pix12.load(":/img/背景图_蓝.png");
+    setAutoFillBackground(true); //图片充满窗口
+    const auto pix = QPixmap(":/img/背景图_蓝.png").scaled(this ->size());
+    // QPixmap pix12 = QPixmap(":/img/背景图_蓝.png");
+    // pix12.load(":/img/背景图_蓝.png");
+    // pix12.scaled(this ->size());
     QPalette p;
-    // p.setBrush(QPalette::Window, QBrush(pix12));
-    p.setColor(QPalette::Window, Qt::gray);
-
+    p.setBrush(QPalette::Window, QBrush(pix));
+    // p.setColor(QPalette::Window, Qt::gray);
     this->setPalette(p);
 
     // showMaximized();
@@ -55,8 +58,9 @@ MyHomeWindow::MyHomeWindow(QWidget* parent) :
     // fot.setBold(30);
     // setFont(fot);
     setupMenu();
-    setupToos();
+    // setupToos();
     createStatusBar();
+    // createCenter();
 }
 
 // 菜单栏
@@ -111,6 +115,35 @@ void MyHomeWindow::setupToos()
     this->addToolBar(toolbar);
 }
 
+void MyHomeWindow::createCenter()
+{
+
+
+    // QTextEdit *textEdit = new QTextEdit("文本编辑器",this);
+    // this->setCentralWidget(textEdit);
+
+    QWidget* widget = new QWidget(this);
+    // widget->setStyleSheet("background-color: red;");
+    // 如果这个QWidget直接show，是有背景色的，但是如果把它放到一个父Widget中时，它就没有了效果。
+    widget->setAutoFillBackground(true);
+    QPalette p;
+    // p.setBrush(QPalette::Window, QBrush(pix12));
+    // p.setColor(QPalette::Window, Qt::green);
+    p.setBrush(this->backgroundRole(), QBrush(Qt::green));
+    widget->setPalette(p);
+    // QVBoxLayout *layout = new QVBoxLayout(widget);
+
+    auto* label = new QLabel("这是一个标签", widget);
+    // layout->addWidget(label);
+
+    // widget->
+
+    // QPalette palette;
+    // palette.setColor(QPalette::Base, Qt::red); // 设置背景色为红色
+    // widget -> setPalette(palette);
+    this->setCentralWidget(widget);
+}
+
 // 工具栏
 void MyHomeWindow::createStatusBar()
 {
@@ -135,29 +168,6 @@ void MyHomeWindow::createStatusBar()
 
     this->addDockWidget(Qt::TopDockWidgetArea, qDockWidget);
 
-    // QTextEdit *textEdit = new QTextEdit("文本编辑器",this);
-    // this->setCentralWidget(textEdit);
-
-    QWidget* widget = new QWidget(this);
-    // widget->setStyleSheet("background-color: red;");
-    // 如果这个QWidget直接show，是有背景色的，但是如果把它放到一个父Widget中时，它就没有了效果。
-    widget->setAutoFillBackground(true);
-    QPalette p;
-    // p.setBrush(QPalette::Window, QBrush(pix12));
-    // p.setColor(QPalette::Window, Qt::green);
-    p.setBrush(this->backgroundRole(),QBrush(Qt::green));
-    widget->setPalette(p);
-    // QVBoxLayout *layout = new QVBoxLayout(widget);
-
-    auto* label = new QLabel("这是一个标签", widget);
-    // layout->addWidget(label);
-
-    // widget->
-
-    // QPalette palette;
-    // palette.setColor(QPalette::Base, Qt::red); // 设置背景色为红色
-    // widget -> setPalette(palette);
-    this->setCentralWidget(widget);
 }
 
 MyHomeWindow::~MyHomeWindow()
