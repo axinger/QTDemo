@@ -148,7 +148,7 @@ AppLogin::~AppLogin() {
 
 void AppLogin::mousePressEvent(QMouseEvent *event)   {
     if (event->button() == Qt::LeftButton) { // 鼠标左键
-        m_dragPosition = event->globalPos() - frameGeometry().topLeft();
+        m_dragPosition = event->globalPosition().toPoint() - frameGeometry().topLeft();
         m_dragging = true;
     }
     event->accept();
@@ -156,7 +156,8 @@ void AppLogin::mousePressEvent(QMouseEvent *event)   {
 
 void AppLogin::mouseMoveEvent(QMouseEvent *event)  {
     if (m_dragging) {
-        move(event->globalPos() - m_dragPosition);
+        // move(event->globalPos() - m_dragPosition);
+        move(event->globalPosition().toPoint() - m_dragPosition);
         event->accept();
     }
 }

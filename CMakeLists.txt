@@ -5,13 +5,14 @@ project(QTDemo VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_PREFIX_PATH "D:/sdk/Qt/6.6.3/mingw_64")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+# 模块化，添加sql支持
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql)
+#全局设置icon，可以是png格式
 set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/icon.rc")
 set(PROJECT_SOURCES
         ${app_icon_resource_windows}
@@ -33,6 +34,9 @@ set(PROJECT_SOURCES
         apphomewindow.ui
         main.cpp
         main.cpp
+        mydbwidget.cpp
+        mydbwidget.h
+        mydbwidget.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -63,7 +67,10 @@ else()
     endif()
 endif()
 
-target_link_libraries(QTDemo PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+# 模块化，添加对sql支持
+target_link_libraries(QTDemo PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
+        Qt${QT_VERSION_MAJOR}::Sql
+)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

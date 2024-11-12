@@ -13,6 +13,7 @@
 #include "myhomewindow.h"
 #include "mylogoutwidget.h"
 #include "apphomewindow.h"
+#include "mydbwidget.h"
 
 void test_map()
 {
@@ -145,22 +146,25 @@ int main(int argc, char* argv[])
     // MyHomeWindow home_window;
     // home_window.show();
     // home_window.hide();
-    AppLogin login;
-    login.setObjectName("mainWidget");
+    // AppLogin login;
+    // login.setObjectName("mainWidget");
+    //
+    // login.show();
+    // // MyHomeWindow home_window;
+    // AppHomeWindow home_window;
+    //
+    // a.setStyleSheet("#mainWidget { border: 1px solid red; }");
+    //
+    // QObject::connect(&login, &AppLogin::loginSuccessful, [&]()
+    // {
+    //     home_window.show();
+    //     login.close();
+    // });
+    // // QObject::connect(&login, &AppLogin::loginSuccessful, &login, &AppLogin::deleteLater, Qt::QueuedConnection);
 
-    login.show();
-    // MyHomeWindow home_window;
-    AppHomeWindow home_window;
 
-    a.setStyleSheet("#mainWidget { border: 1px solid red; }");
-
-    QObject::connect(&login, &AppLogin::loginSuccessful, [&]()
-    {
-        home_window.show();
-        login.close();
-    });
-    // QObject::connect(&login, &AppLogin::loginSuccessful, &login, &AppLogin::deleteLater, Qt::QueuedConnection);
-
+    MyDbWidget widget;
+    widget.show();
     return QApplication::exec();
 
 
