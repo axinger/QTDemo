@@ -31,6 +31,8 @@ set(PROJECT_SOURCES
         apphomewindow.cpp
         apphomewindow.h
         apphomewindow.ui
+        main.cpp
+        main.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
