@@ -133,6 +133,7 @@ void test4_引用和指针参数()
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
+    // a.setStyleSheet("#mainWidget { border: 1px solid red; }");
     // 设置全局样式
     // a.setStyleSheet("QPushButton { background-color: red; }");
     // 设置全局样式表，为所有QPushButton设置统一的图标
@@ -163,14 +164,23 @@ int main(int argc, char* argv[])
     // // QObject::connect(&login, &AppLogin::loginSuccessful, &login, &AppLogin::deleteLater, Qt::QueuedConnection);
 
 
-    MyDbWidget widget;
-    widget.show();
+    // MyDbWidget widget;
+    // widget.show();
+
+
+    qInfo() << "登录模块=================================";
+    qDebug() << "qDebug=================================";
+    qCritical() << "qCritical=================================";
+    qWarning() << "qWarning=================================";
+    // qFatal() << "qFatal=================================";
+    // #登录
+    AppLogin login;
+    login.show();
+    AppHomeWindow home_window;
+    QObject::connect(&login, &AppLogin::loginSuccessful, [&]()
+    {
+        home_window.show();
+        login.close();
+    });
     return QApplication::exec();
-
-
-    // test_map();
-
-    // test3_匿名函数();
-    test4_引用和指针参数();
-    return 0;
 }
