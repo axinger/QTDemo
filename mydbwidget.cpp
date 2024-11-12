@@ -46,7 +46,7 @@ void MyDbWidget::on_pushButton_2_clicked()
     // 创建表
     QSqlQuery query;
     QString createTableQuery =
-        "CREATE TABLE IF NOT EXISTS mytable (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER)";
+        "CREATE TABLE IF NOT EXISTS test_user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER)";
     if (!query.exec(createTableQuery))
     {
         qDebug() << "Failed to create table.";
@@ -62,7 +62,7 @@ void MyDbWidget::on_pushButton_3_clicked()
 {
     // 插入数据
 
-    QString insertQuery = "INSERT INTO mytable (name, age) VALUES (:name, :age)";
+    QString insertQuery = "INSERT INTO test_user (name, age) VALUES (:name, :age)";
     QSqlQuery query;
     query.prepare(insertQuery);
     query.bindValue(":name", "John");
@@ -82,10 +82,10 @@ void MyDbWidget::on_pushButton_4_clicked()
 {
     QSqlQuery query;
     // 查询数据
-    QString selectQuery = "SELECT * FROM mytable";
+    QString selectQuery = "SELECT * FROM test_user";
     if (!query.exec(selectQuery))
     {
-        qDebug() << "Failed to select data.";
+        qDebug() << "查询数据失败";
         return;
     }
 
