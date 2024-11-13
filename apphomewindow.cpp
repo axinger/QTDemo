@@ -8,25 +8,51 @@
 
 #include <qevent.h>
 #include <qmessagebox.h>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 #include "ui_AppHomeWindow.h"
 
 
 AppHomeWindow::AppHomeWindow(QWidget* parent) :
-    QWidget(parent), ui(new Ui::AppHomeWindow)
+    QMainWindow(parent), ui(new Ui::AppHomeWindow)
 {
     ui->setupUi(this);
+    this->resize(800, 600);
+
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    QPushButton *logoutButton = new QPushButton("退出登录", this);
+
+    layout->addWidget(logoutButton);
+
+    QWidget *centralWidget = new QWidget(this);
+    centralWidget->setLayout(layout);
+
+
+    connect(logoutButton, &QPushButton::clicked, this,[=]
+    {
+        ignoreClose = true;
+        emit this-> logout();
+    });
 }
 
 AppHomeWindow::~AppHomeWindow()
 {
     delete ui;
+    qDebug() << "AppHomeWindow::~AppHomeWindow";
 }
 
 //拦截关闭按钮
 void AppHomeWindow::closeEvent(QCloseEvent* event)
 {
-    auto res = QMessageBox::question(this, "提示", "确定关闭吗？", QMessageBox::Yes | QMessageBox::No);
+    if (ignoreClose)
+    {
+        event->accept();
+        ignoreClose = false;
+        return;
+    }
+    auto res = QMessageBox::question(this, "确认关闭", "确定要关闭程序吗？", QMessageBox::Yes | QMessageBox::No);
 
     if (res == QMessageBox::Yes)
     {

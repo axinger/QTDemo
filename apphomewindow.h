@@ -5,23 +5,36 @@
 #ifndef APPHOMEWINDOW_H
 #define APPHOMEWINDOW_H
 
+#include <QMainWindow>
 #include <QWidget>
 
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class AppHomeWindow; }
+
+namespace Ui
+{
+    class AppHomeWindow;
+}
+
 QT_END_NAMESPACE
 
-class AppHomeWindow : public QWidget {
-Q_OBJECT
+class AppHomeWindow : public QMainWindow
+{
+    Q_OBJECT
 
 public:
-    explicit AppHomeWindow(QWidget *parent = nullptr);
+    explicit AppHomeWindow(QWidget* parent = nullptr);
     ~AppHomeWindow() override;
+
 protected:
     void closeEvent(QCloseEvent* event) override;
+
 private:
-    Ui::AppHomeWindow *ui;
+    Ui::AppHomeWindow* ui;
+
+    bool ignoreClose;
+signals:
+    void logout();
 };
 
 

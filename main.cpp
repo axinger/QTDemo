@@ -164,23 +164,36 @@ int main(int argc, char* argv[])
     // // QObject::connect(&login, &AppLogin::loginSuccessful, &login, &AppLogin::deleteLater, Qt::QueuedConnection);
 
 
-    MyDbWidget widget;
-    widget.show();
-
-
-    qInfo() << "登录模块=================================";
-    qDebug() << "qDebug=================================";
-    qCritical() << "qCritical=================================";
-    qWarning() << "qWarning=================================";
+    // MyDbWidget widget;
+    // widget.show();
+    //
+    //
+    // qInfo() << "登录模块=================================";
+    // qDebug() << "qDebug=================================";
+    // qCritical() << "qCritical=================================";
+    // qWarning() << "qWarning=================================";
     // qFatal() << "qFatal=================================";
-    // #登录
-    // AppLogin login;
-    // login.show();
-    // AppHomeWindow home_window;
-    // QObject::connect(&login, &AppLogin::loginSuccessful, [&]()
-    // {
-    //     home_window.show();
-    //     login.close();
-    // });
+
+    // close()：适合用于不再需要的窗口，关闭并释放资源，如主窗口关闭。
+    // hide()：适合用于临时隐藏窗口，而不是永久性关闭，适合用在弹出窗口、登录窗口等。
+    AppLogin login;
+    login.show();
+    AppHomeWindow home_window;
+    QObject::connect(&login, &AppLogin::loginSuccessful, [&]()
+    {
+        home_window.show();
+        login.close();
+    });
+
+    QObject::connect(&home_window, &AppHomeWindow::logout, [&]()
+    {
+        // auto res = home_window.close();
+        auto res = home_window.close();
+        if (res)
+        {
+            login.show();
+        }
+    });
+
     return QApplication::exec();
 }
