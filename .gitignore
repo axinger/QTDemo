@@ -88,4 +88,5 @@ fabric.properties
 
 # cmake generated files
 CMakeLists.txt.user
+CMakeLists.txt.*
 cmake-build-*

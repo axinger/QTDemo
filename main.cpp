@@ -164,8 +164,8 @@ int main(int argc, char* argv[])
     // // QObject::connect(&login, &AppLogin::loginSuccessful, &login, &AppLogin::deleteLater, Qt::QueuedConnection);
 
 
-    // MyDbWidget widget;
-    // widget.show();
+    MyDbWidget widget;
+    widget.show();
 
 
     qInfo() << "登录模块=================================";
@@ -174,13 +174,13 @@ int main(int argc, char* argv[])
     qWarning() << "qWarning=================================";
     // qFatal() << "qFatal=================================";
     // #登录
-    AppLogin login;
-    login.show();
-    AppHomeWindow home_window;
-    QObject::connect(&login, &AppLogin::loginSuccessful, [&]()
-    {
-        home_window.show();
-        login.close();
-    });
+    // AppLogin login;
+    // login.show();
+    // AppHomeWindow home_window;
+    // QObject::connect(&login, &AppLogin::loginSuccessful, [&]()
+    // {
+    //     home_window.show();
+    //     login.close();
+    // });
     return QApplication::exec();
 }

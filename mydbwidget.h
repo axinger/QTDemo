@@ -5,6 +5,7 @@
 #ifndef MYDBWIDGET_H
 #define MYDBWIDGET_H
 
+#include <QNetworkAccessManager>
 #include <QWidget>
 
 
@@ -28,9 +29,12 @@ class MyDbWidget : public QWidget {
 
     void on_pushButton_4_clicked();
    static  void on_pushButton_5_clicked();
+     void on_testGet_clicked();
 
 private:
     Ui::MyDbWidget *ui;
+    QNetworkAccessManager *networkManager;
+    QNetworkReply *reply;
 };
 
 

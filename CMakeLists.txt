@@ -10,8 +10,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # 模块化，添加sql支持
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql Core Network)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql Core Network)
+
+# 使用 Qt 自动处理的 CMake 设置
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
 #全局设置icon，可以是png格式
 set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/icon.rc")
 set(PROJECT_SOURCES
@@ -70,6 +76,8 @@ endif()
 # 模块化，添加对sql支持
 target_link_libraries(QTDemo PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::Sql
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Network
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

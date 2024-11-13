@@ -12,7 +12,14 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
+#include <qjsondocument.h>
+#include <qjsonobject.h>
 #include <QMessageBox>
+
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QUrl>
 
 MyDbWidget::MyDbWidget(QWidget* parent) :
     QWidget(parent), ui(new Ui::MyDbWidget)
@@ -102,3 +109,49 @@ void MyDbWidget::on_pushButton_5_clicked()
 {
     qDebug() << "ui槽格式： on_控件id_事件名称";
 }
+
+void MyDbWidget::on_testGet_clicked()
+{
+
+    // 设置请求 URL
+    QUrl url("https://jsonplaceholder.typicode.com/todos/1");
+    QNetworkRequest request(url);
+
+    // 创建网络管理器
+    networkManager = new QNetworkAccessManager(this);
+    // 发送 GET 请求
+    reply = networkManager->get(request);
+
+    // 连接信号与槽
+    connect(reply, &QNetworkReply::finished, this, [=]
+    {
+
+        // 读取响应
+       if (reply->error() == QNetworkReply::NoError) {
+           // 打印返回的内容
+           // qDebug() << "Response: " << reply->readAll();
+
+           QJsonDocument doc = QJsonDocument::fromJson( reply->readAll());
+           if (doc.isObject()) {
+                QJsonObject jsonObject = doc.object();
+                // 打印 JSON 对象内容
+                qDebug() << "ID:" << jsonObject["userId"].toInt();
+                qDebug() << "UserID:" << jsonObject["userId"].toInt();
+                qDebug() << "Title:" << jsonObject["title"].toString();
+                qDebug() << "Completed:" << jsonObject["completed"].toBool();
+            }else
+            {
+                qDebug()<< "!isObject";
+            }
+
+       } else {
+           // 打印错误信息
+           qDebug() << "Error: " << reply->errorString();
+       }
+
+       // 清理
+       reply->deleteLater();
+    });
+
+}
+

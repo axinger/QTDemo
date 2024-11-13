@@ -78,6 +78,19 @@
     <string>PushButton</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="testGet">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>100</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>get请求</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
